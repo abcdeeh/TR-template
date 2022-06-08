@@ -4,7 +4,7 @@ def add_to_chart(ws,book,Sheet,Graph_Tittle,i,min_x,max_x):
 
     chart = book.add_chart({'type': 'scatter','subtype': 'smooth'})
     chart.set_title ({'name': Graph_Tittle,'name_font':{'name': 'Calibri', 'size': 14} })
-    chart.set_y_axis({'name': 'Kerr Signal[%]','name_font':{'name': 'Calibri', 'size': 12},'label_position': 'low'})
+    chart.set_y_axis({'name': 'V[V]','name_font':{'name': 'Calibri', 'size': 12},'label_position': 'low'})
     chart.set_x_axis({'name': 'Delay Time[ps]','name_font':{'name': 'Calibri', 'size': 12},'label_position': 'low','major_gridlines':{'visible':True}})
     chart.set_legend({
      "position": 'none'})
@@ -22,7 +22,7 @@ def add_to_chart1(ws,book,Sheet,Graph_Tittle,i,min,max):
 
     chart = book.add_chart({'type': 'scatter'})
     chart.set_title ({'name': Graph_Tittle,'name_font':{'name': 'Calibri', 'size': 14}})
-    chart.set_y_axis({'name': 'Kerr Signal[%]','name_font':{'name': 'Calibri', 'size': 12},'label_position': 'low'})
+    chart.set_y_axis({'name': 'V[V]','name_font':{'name': 'Calibri', 'size': 12},'label_position': 'low'})
     chart.set_x_axis({'name': 'Delay Time[ps]','name_font':{'name': 'Calibri', 'size': 12},'label_position': 'low','major_gridlines':{'visible':True}})
     chart.add_series({
     'categories': [Sheet, 1, 0, i, 0],
