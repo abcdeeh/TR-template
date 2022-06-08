@@ -1,5 +1,5 @@
 from TR_programs import Copy_and_Paste,paste1
-import xlsxwriter,os
+import xlsxwriter,os,sys
 import numpy as np
 
 files = []
@@ -21,15 +21,19 @@ while i < 3:
 			path =input()
 
 
-	if os.path.isfile:
+	try:
+		f=open(path,'r')
+		f.close()
 		base, ext = os.path.splitext(path)
-		if ext=='.txt' or ext=='':
+		if ext=='.txt' or ext=='' or ext=='.text':
 			break
+	except:
+		pass
 	try:
 		for f in os.listdir(path):
 			if os.path.isfile(os.path.join(path, f)):
 				base, ext = os.path.splitext(f)
-				if ext=='.txt' or ext=='':
+				if ext=='.txt' or ext=='' or ext=='.text':
 					files2=np.append(files2,f)
 		if files2.shape[0]!=0:
 			break
@@ -65,6 +69,7 @@ book = xlsxwriter.Workbook(file_name, {'constant_memory': True})
 book.add_worksheet(Sheet)
 Copy_and_Paste.copy(book,Sheet,path1,Graph_Tittle)
 i+=1
+p=2
 while i < files2.shape[0]:
 	path1=os.path.join(path, files2[i])
 	base, ext = os.path.splitext(path1)
@@ -75,7 +80,33 @@ while i < files2.shape[0]:
 	Graph_Tittle=pqr[asds-1]
 	if len(Sheet)>30:
 		Sheet=Sheet[0:28]
-	book.add_worksheet(Sheet)
+	try:
+		book.add_worksheet(Sheet)
+	except:
+		try:
+			Sheet1=Sheet+"1"
+			book.add_worksheet(Sheet1)
+			Sheet=Sheet1
+			del Sheet1
+			p=2
+		except:
+			while p<100:
+				try:
+					Sheet1=Sheet+str(p)
+					book.add_worksheet(Sheet1)
+					Sheet=Sheet1
+					del Sheet1
+					break
+
+				except:
+					p+=1
+
+
+	if p==100:
+		print("Reduce the number of files to be read")
+		input()
+		book.close()
+		sys.exit()
 	Copy_and_Paste.copy(book,Sheet,path1,Graph_Tittle)
 	i+=1
 book.close()
